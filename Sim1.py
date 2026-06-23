@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 def mkFfield(x,y):
-    fx = fxBase
-    fy = fyBase * y
+    fx = fxBase2
+    fy = fyBase2 * y
     return fx, fy
 
 def mkPoint(maxX,maxY):
@@ -14,11 +14,15 @@ def mkPoint(maxX,maxY):
     y = rd.uniform(-maxY,maxY)
     return x,y
 
-fxBase = 0.3
-fyBase = 0.1
+interval1 = 30
+fxBase1 = 30
+fyBase1 = 10
+fxBase2 = fxBase1/interval1
+fyBase2 = fyBase1/interval1
 n = 2
 maxX = 0.2
 maxY = 0.5
+
 
 def step(points):
     for i in range(len(points)):
@@ -67,7 +71,7 @@ ani = FuncAnimation(
     fig,
     update,
     fargs=(points,),
-    interval=100
+    interval=interval1
 )
 
 plt.show()

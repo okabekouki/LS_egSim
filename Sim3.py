@@ -5,12 +5,18 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 # 力場パラメータ
-cArea = [0.2,0.1]
-cStr = [0.5,0.5]
-FMx = [3,3]
-FMy = [5,-5]
-FMrot = [-60,60]
-FMrot = [math.radians(i) for i in FMrot]
+dim = 2
+
+cArea = np.array([0.2,0.1])
+cStr = np.array([0.5,0.5])
+# FMは力場放射器番号をkeyに，valueに力場放射器のx,y,rotを持つ
+FM = np.array([
+    [3,5,-60],
+    [3,-5,60]
+    ], dtype=float)
+FM[:,2] = np.radians(FM[:,2])
+print(FM)
+
 nF = 3
 nArea = 1
 
@@ -22,7 +28,7 @@ def mkFbase(xc,yc,i):
     Fy = 0
     return Fx,Fy
 
-def mkF1(x, y, i):
+def mkF1(r, i):
     # i番目のFMx,FMyにあるFMrotの向きの力場放射器を
     # x=0,y=0,x軸正の向きに放射されている座標系へ変換する
     dx = x - FMx[i]
@@ -47,4 +53,4 @@ def mkF2(x,y):
         F = F + np.array([mkF1(x,y,i)])
     return F
 
-print(mkF2(1,2))
+# print(mkF2(1,2))
